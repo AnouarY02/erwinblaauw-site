@@ -66,8 +66,12 @@
     @apply text-base leading-relaxed text-charcoal-700 sm:text-lg;
   }
 
-  /* Subtiele scroll-animatie; zonder JS blijft alles zichtbaar (zie reveal.tsx). */
-  .reveal {
+  /*
+    Subtiele scroll-animatie; zie reveal.tsx.
+    Alleen verbergen als JavaScript daadwerkelijk draait (de klasse `js` wordt in
+    layout.tsx gezet). Zonder JS staat er dus geen lege pagina.
+  */
+  html.js .reveal {
     @apply opacity-0;
   }
 

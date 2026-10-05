@@ -60,6 +60,19 @@ export const viewport: Viewport = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="nl" className={inter.variable}>
+      <head>
+        {/*
+          De scroll-animatie mag nooit inhoud kosten. Pas als dit regeltje heeft
+          gedraaid krijgt <html> de klasse `js`, en pas dan verbergt globals.css
+          een nog-niet-onthulde sectie. Staat JavaScript uit of faalt het, dan
+          blijft alles gewoon zichtbaar. Vaste tekst, geen invoer van buiten.
+        */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: "document.documentElement.classList.add('js')",
+          }}
+        />
+      </head>
       <body className="flex min-h-dvh flex-col">
         <a
           href="#hoofdinhoud"
