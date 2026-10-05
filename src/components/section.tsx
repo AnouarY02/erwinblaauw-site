@@ -1,5 +1,6 @@
 import Image from 'next/image'
 import type { ReactNode } from 'react'
+import type { Photo as PhotoData } from '@/data/photos'
 
 export function SectionHeading({
   eyebrow,
@@ -19,18 +20,16 @@ export function SectionHeading({
   return (
     <div className={`max-w-2xl ${align === 'center' ? 'mx-auto text-center' : ''}`}>
       {eyebrow && (
-        <p
-          className={`text-xs font-semibold uppercase tracking-[0.18em] ${
-            onDark ? 'text-copper-300' : 'text-copper-700'
-          }`}
-        >
+        <p className={`eyebrow ${onDark ? 'text-copper-300' : 'text-copper-700'}`}>
+          <span
+            aria-hidden="true"
+            className={`h-px w-7 ${onDark ? 'bg-copper-400/70' : 'bg-copper-400'}`}
+          />
           {eyebrow}
         </p>
       )}
       <Tag
-        className={`mt-3 text-3xl font-bold tracking-tight sm:text-4xl ${
-          onDark ? 'text-white' : 'text-navy-900'
-        }`}
+        className={`mt-4 text-display-sm font-bold ${onDark ? 'text-white' : 'text-navy-900'}`}
       >
         {title}
       </Tag>
@@ -48,10 +47,52 @@ export function SectionHeading({
 }
 
 /**
- * Echte foto uit `public/fotos/`. De beelden komen van de huidige website van
- * Erwin Blaauw en zijn klein van origine (circa 174 x 294 en 155 x 192 pixels).
- * Geef de weergavebreedte daarom mee via een wrapper om de foto heen en houd
- * die dicht bij het oorspronkelijke formaat, anders wordt het beeld wazig.
+ * Beeldvlak met een vaste verhouding. De foto vult het vlak (object-cover), dus
+ * hij wordt nooit uitgerekt — alleen bijgesneden. `sizes` is verplicht mee te
+ * geven zodat de browser niet onnodig de grootste variant downloadt.
+ */
+export function CoverPhoto({
+  photo,
+  sizes,
+  priority = false,
+  className = '',
+  rounded = 'rounded-3xl',
+  overlay = false,
+}: {
+  photo: PhotoData
+  sizes: string
+  priority?: boolean
+  /** Verhouding en overige opmaak van het omhullende vlak. */
+  className?: string
+  rounded?: string
+  /** Lichte donkere waas, voor beeld waar tekst overheen komt. */
+  overlay?: boolean
+}) {
+  return (
+    <div className={`relative overflow-hidden bg-navy-100 ${rounded} ${className}`}>
+      <Image
+        src={photo.src}
+        alt={photo.alt}
+        fill
+        sizes={sizes}
+        priority={priority}
+        className="object-cover"
+      />
+      {overlay && (
+        <div
+          aria-hidden="true"
+          className="absolute inset-0 bg-gradient-to-t from-navy-950/75 via-navy-950/15 to-transparent"
+        />
+      )}
+    </div>
+  )
+}
+
+/**
+ * Echte foto uit `public/fotos/` op ware grootte. De bedrijfsfoto's van Erwin
+ * zijn klein van origine (circa 174 x 294 pixels). Geef de weergavebreedte
+ * daarom mee via een wrapper en houd die dicht bij het oorspronkelijke formaat,
+ * anders wordt het beeld wazig.
  */
 export function Photo({
   src,
@@ -100,7 +141,7 @@ export function PhotoPlaceholder({
   const dark = tone === 'dark'
   return (
     <div
-      className={`relative flex flex-col items-center justify-center overflow-hidden rounded-2xl border-2 border-dashed p-6 text-center ${
+      className={`relative flex flex-col items-center justify-center overflow-hidden rounded-3xl border-2 border-dashed p-6 text-center ${
         dark
           ? 'border-white/25 bg-white/[0.05]'
           : 'border-navy-300 bg-gradient-to-br from-navy-50 via-white to-copper-50'

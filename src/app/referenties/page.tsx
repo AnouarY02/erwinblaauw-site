@@ -3,7 +3,10 @@ import { IconImage, IconPin } from '@/components/icons'
 import { PageHero } from '@/components/page-hero'
 import { Reveal } from '@/components/reveal'
 import { SectionHeading } from '@/components/section'
+import { servicePhotos } from '@/data/photos'
+import { site } from '@/data/site'
 import { JsonLd, breadcrumbJsonLd } from '@/lib/jsonld'
+import { mailtoAlgemeen } from '@/lib/mailto'
 import { pageMetadata } from '@/lib/seo'
 
 export const metadata = pageMetadata({
@@ -36,7 +39,7 @@ const groups = [
 
 function ProjectSlot({ index }: { index: number }) {
   return (
-    <div className="flex h-full flex-col overflow-hidden rounded-2xl border border-navy-100 bg-white shadow-card">
+    <div className="flex h-full flex-col overflow-hidden rounded-3xl border border-navy-100 bg-white shadow-card">
       <div className="relative flex aspect-[4/3] items-center justify-center border-b border-dashed border-navy-200 bg-gradient-to-br from-navy-50 via-white to-copper-50">
         <div
           aria-hidden="true"
@@ -77,14 +80,20 @@ export default function ReferentiesPage() {
         eyebrow="Referenties"
         title="Projecten bij bedrijven en particulieren"
         intro="Deze pagina wordt gevuld met echte projecten. De opzet staat klaar; de foto's en beschrijvingen volgen."
+        photo={servicePhotos['zink-en-dakwerk']}
       />
 
       <section className="border-b border-copper-200 bg-copper-50">
         <div className="container-page py-6">
-          <p className="text-sm font-medium text-copper-900">
-            <strong className="font-bold">Binnenkort meer informatie.</strong> Hieronder staan
-            plaatshouders voor projecten. Zodra er foto&apos;s en beschrijvingen zijn, komen die
-            hier te staan.
+          <p className="flex flex-col gap-3 text-sm font-medium text-copper-900 sm:flex-row sm:items-center sm:justify-between">
+            <span>
+              <strong className="font-bold">Binnenkort meer informatie.</strong> Hieronder staan
+              plaatshouders voor projecten. Zodra er foto&apos;s en beschrijvingen zijn, komen
+              die hier te staan.
+            </span>
+            <a href={mailtoAlgemeen} className="btn-mail shrink-0 !px-4 !py-2 !text-sm">
+              Mail {site.email}
+            </a>
           </p>
         </div>
       </section>
@@ -93,7 +102,7 @@ export default function ReferentiesPage() {
         <section
           key={group.id}
           id={group.id}
-          className={`scroll-mt-24 py-20 ${gi % 2 === 1 ? 'bg-navy-50/70' : 'bg-white'}`}
+          className={`scroll-mt-24 py-20 lg:py-24 ${gi % 2 === 1 ? 'bg-navy-50/70' : 'bg-white'}`}
         >
           <div className="container-page">
             <Reveal>

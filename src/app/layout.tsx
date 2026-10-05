@@ -1,15 +1,23 @@
 import type { Metadata, Viewport } from 'next'
-import { Inter } from 'next/font/google'
+import { Inter, Plus_Jakarta_Sans } from 'next/font/google'
 import './globals.css'
 import { Footer } from '@/components/footer'
 import { Header } from '@/components/header'
 import { site } from '@/data/site'
 import { JsonLd, localBusinessJsonLd } from '@/lib/jsonld'
 
+/** Lopende tekst: Inter variable. */
 const inter = Inter({
   subsets: ['latin'],
   display: 'swap',
   variable: '--font-sans',
+})
+
+/** Koppen: Plus Jakarta Sans variable — iets steviger en moderner dan Inter. */
+const display = Plus_Jakarta_Sans({
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-display',
 })
 
 export const metadata: Metadata = {
@@ -59,7 +67,7 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="nl" className={inter.variable}>
+    <html lang="nl" className={`${inter.variable} ${display.variable}`}>
       <head>
         {/*
           De scroll-animatie mag nooit inhoud kosten. Pas als dit regeltje heeft

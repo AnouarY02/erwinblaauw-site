@@ -5,6 +5,14 @@
 @layer base {
   :root {
     --font-sans: 'Inter', system-ui, sans-serif;
+    --font-display: var(--font-sans);
+
+    /* Eén bron voor het palet, zodat overlays en gradients niet uit elkaar lopen. */
+    --navy-950: 13 24 38;
+    --navy-900: 21 37 57;
+    --navy-800: 28 50 82;
+    --copper-400: 226 133 76;
+    --copper-600: 194 85 32;
   }
 
   html {
@@ -14,6 +22,14 @@
 
   body {
     @apply bg-white text-charcoal-800 antialiased;
+    font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
+  }
+
+  h1,
+  h2,
+  h3 {
+    @apply font-display;
+    text-wrap: balance;
   }
 
   /* Duidelijk zichtbare focus voor toetsenbordnavigatie (WCAG 2.4.7). */
@@ -45,25 +61,56 @@
     @apply mx-auto w-full max-w-content px-5 sm:px-6 lg:px-8;
   }
 
+  /* Ruimte tussen secties: één schaal voor de hele site. */
+  .section-y {
+    @apply py-20 lg:py-28;
+  }
+
   .btn {
-    @apply inline-flex items-center justify-center gap-2 rounded-lg px-5 py-3 text-base font-semibold
-           transition-colors duration-200;
+    @apply inline-flex items-center justify-center gap-2 rounded-xl px-5 py-3 text-base font-semibold
+           transition-all duration-200 ease-smooth;
   }
 
   .btn-primary {
-    @apply btn bg-copper-600 text-white hover:bg-copper-700;
+    @apply btn bg-copper-600 text-white shadow-[0_10px_24px_-12px_rgba(194,85,32,0.9)]
+           hover:-translate-y-0.5 hover:bg-copper-700 hover:shadow-[0_16px_32px_-14px_rgba(194,85,32,0.95)];
+  }
+
+  /* Mailknop: zelfde gewicht als de belknop, maar in het donkerblauw. */
+  .btn-mail {
+    @apply btn bg-navy-900 text-white shadow-[0_10px_24px_-14px_rgba(13,24,38,0.9)]
+           hover:-translate-y-0.5 hover:bg-navy-800 hover:shadow-[0_16px_32px_-16px_rgba(13,24,38,0.95)];
   }
 
   .btn-secondary {
-    @apply btn border-2 border-navy-200 bg-white text-navy-800 hover:border-navy-400 hover:bg-navy-50;
+    @apply btn border border-navy-200 bg-white text-navy-800
+           hover:-translate-y-0.5 hover:border-navy-300 hover:bg-navy-50;
   }
 
   .btn-on-dark {
-    @apply btn border-2 border-white/30 bg-white/5 text-white hover:border-white/60 hover:bg-white/10;
+    @apply btn border border-white/25 bg-white/[0.07] text-white backdrop-blur-sm
+           hover:-translate-y-0.5 hover:border-white/50 hover:bg-white/15;
+  }
+
+  .btn-ghost-dark {
+    @apply btn bg-white text-navy-900 hover:-translate-y-0.5 hover:bg-navy-50;
+  }
+
+  .eyebrow {
+    @apply inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.18em];
+  }
+
+  .card {
+    @apply rounded-3xl border border-navy-100 bg-white shadow-card;
   }
 
   .prose-site p {
-    @apply text-base leading-relaxed text-charcoal-700 sm:text-lg;
+    @apply text-base leading-relaxed text-charcoal-700 sm:text-[1.0625rem];
+  }
+
+  /* Dunne koperen streep als sectie-overgang. */
+  .rule-copper {
+    @apply h-px w-full bg-gradient-to-r from-transparent via-copper-300 to-transparent;
   }
 
   /*

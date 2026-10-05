@@ -1,11 +1,14 @@
 import Link from 'next/link'
 import { ContactForm } from '@/components/contact-form'
+import { CallMailButtons } from '@/components/contact-actions'
 import { IconArrow, IconClock, IconMail, IconPhone, IconPin } from '@/components/icons'
 import { PageHero } from '@/components/page-hero'
 import { Reveal } from '@/components/reveal'
 import { SectionHeading } from '@/components/section'
+import { servicePhotos } from '@/data/photos'
 import { site } from '@/data/site'
 import { JsonLd, breadcrumbJsonLd } from '@/lib/jsonld'
+import { mailtoAdvies, mailtoAlgemeen } from '@/lib/mailto'
 import { pageMetadata } from '@/lib/seo'
 
 export const metadata = pageMetadata({
@@ -21,10 +24,26 @@ export default function ContactPage() {
         crumb="Contact"
         eyebrow="Contact"
         title="Neem contact op"
-        intro="Bel voor een snel antwoord, of vul het formulier in en beschrijf uw situatie. We nemen dan contact met u op."
+        intro="Bel of mail voor een snel antwoord, of vul het formulier in en beschrijf uw situatie. We nemen dan contact met u op."
+        photo={servicePhotos['badkamer-en-sanitair']}
       />
 
-      <section className="container-page py-16 lg:py-20">
+      {/* Bellen en mailen staan bovenaan, als snelste route. */}
+      <section className="border-b border-navy-100 bg-navy-50">
+        <div className="container-page flex flex-col gap-5 py-7 sm:flex-row sm:items-center sm:justify-between">
+          <p className="text-base font-semibold text-navy-900">
+            Liever geen formulier? Bel of mail rechtstreeks.
+          </p>
+          <CallMailButtons
+            mailHref={mailtoAlgemeen}
+            mailLabel={`Mail ${site.email}`}
+            size="sm"
+            className="shrink-0"
+          />
+        </div>
+      </section>
+
+      <section className="container-page py-16 lg:py-24">
         <div className="grid gap-12 lg:grid-cols-[0.85fr_1.15fr] lg:gap-16">
           {/* Gegevens */}
           <div>
@@ -64,10 +83,17 @@ export default function ContactPage() {
                       E-mail
                     </p>
                     <a
-                      href={`mailto:${site.email}`}
+                      href={mailtoAlgemeen}
                       className="mt-1 block break-all rounded text-lg font-bold text-navy-900 hover:text-copper-700"
                     >
                       {site.email}
+                    </a>
+                    <a
+                      href={mailtoAdvies}
+                      className="btn-mail mt-3 !px-4 !py-2 !text-sm"
+                    >
+                      <IconMail className="h-4 w-4" />
+                      Mail uw aanvraag
                     </a>
                   </div>
                 </li>
@@ -144,7 +170,7 @@ export default function ContactPage() {
 
           {/* Formulier */}
           <Reveal delay={60}>
-            <div className="rounded-2xl border border-navy-100 bg-white p-6 shadow-card sm:p-8">
+            <div className="rounded-3xl border border-navy-100 bg-white p-6 shadow-card sm:p-9">
               <h2 className="text-2xl font-bold tracking-tight text-navy-900">
                 Vraag advies aan
               </h2>
@@ -154,6 +180,22 @@ export default function ContactPage() {
               </p>
               <div className="mt-8">
                 <ContactForm />
+              </div>
+
+              {/* Alternatief naast het formulier: mailen of bellen. */}
+              <div className="mt-9 border-t border-navy-100 pt-7">
+                <p className="text-sm font-semibold text-navy-900">
+                  Liever niet via het formulier?
+                </p>
+                <p className="mt-1.5 text-sm leading-relaxed text-charcoal-700">
+                  Mail uw vraag of bel even. Dat mag ook buiten het formulier om.
+                </p>
+                <CallMailButtons
+                  mailHref={mailtoAlgemeen}
+                  mailLabel={`Mail ${site.email}`}
+                  size="sm"
+                  className="mt-4"
+                />
               </div>
             </div>
           </Reveal>
