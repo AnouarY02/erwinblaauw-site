@@ -1,0 +1,77 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --font-sans: 'Inter', system-ui, sans-serif;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    @apply bg-white text-charcoal-800 antialiased;
+  }
+
+  /* Duidelijk zichtbare focus voor toetsenbordnavigatie (WCAG 2.4.7). */
+  :focus-visible {
+    @apply outline-none ring-2 ring-copper-500 ring-offset-2 ring-offset-white;
+  }
+
+  .dark-section :focus-visible {
+    @apply ring-copper-300 ring-offset-navy-950;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+@layer components {
+  .container-page {
+    @apply mx-auto w-full max-w-content px-5 sm:px-6 lg:px-8;
+  }
+
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-lg px-5 py-3 text-base font-semibold
+           transition-colors duration-200;
+  }
+
+  .btn-primary {
+    @apply btn bg-copper-600 text-white hover:bg-copper-700;
+  }
+
+  .btn-secondary {
+    @apply btn border-2 border-navy-200 bg-white text-navy-800 hover:border-navy-400 hover:bg-navy-50;
+  }
+
+  .btn-on-dark {
+    @apply btn border-2 border-white/30 bg-white/5 text-white hover:border-white/60 hover:bg-white/10;
+  }
+
+  .prose-site p {
+    @apply text-base leading-relaxed text-charcoal-700 sm:text-lg;
+  }
+
+  /* Subtiele scroll-animatie; zonder JS blijft alles zichtbaar (zie reveal.tsx). */
+  .reveal {
+    @apply opacity-0;
+  }
+
+  .reveal-visible {
+    @apply animate-fade-up opacity-100;
+  }
+}
