@@ -6,6 +6,7 @@ import { SectionHead } from '@/components/section'
 import { serviceIcons } from '@/components/service-icons'
 import { coreMessage, services } from '@/data/site'
 import { pageMetadata } from '@/lib/seo'
+import { JsonLd, breadcrumbJsonLd } from '@/lib/jsonld'
 
 export const metadata = pageMetadata({
   title: 'Over ons',
@@ -87,6 +88,12 @@ export default function OverOnsPage() {
       <CtaBand
         title="Een vraag over gas, water, cv of dakwerk?"
         text="Bel even, dan kijken we samen wat er nodig is. Liever eerst uw situatie beschrijven? Vraag dan advies aan."
+      />
+      <JsonLd
+        data={breadcrumbJsonLd([
+          { name: 'Home', path: '/' },
+          { name: 'Over ons', path: '/over-ons' },
+        ])}
       />
     </>
   )

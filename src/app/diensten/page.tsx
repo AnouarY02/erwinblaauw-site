@@ -6,6 +6,7 @@ import { PageHero } from '@/components/page-hero'
 import { serviceIcons } from '@/components/service-icons'
 import { services } from '@/data/site'
 import { pageMetadata } from '@/lib/seo'
+import { JsonLd, breadcrumbJsonLd } from '@/lib/jsonld'
 
 export const metadata = pageMetadata({
   title: 'Diensten',
@@ -63,6 +64,12 @@ export default function DienstenPage() {
       <CtaBand
         title="Niet gevonden wat u zocht?"
         text="Staat uw vraag er niet bij? Bel dan even. Dan hoort u direct of we u kunnen helpen."
+      />
+      <JsonLd
+        data={breadcrumbJsonLd([
+          { name: 'Home', path: '/' },
+          { name: 'Diensten', path: '/diensten' },
+        ])}
       />
     </>
   )

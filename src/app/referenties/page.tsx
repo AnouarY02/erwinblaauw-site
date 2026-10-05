@@ -2,6 +2,7 @@ import { CtaBand } from '@/components/cta-band'
 import { IconImage } from '@/components/icons'
 import { PageHero } from '@/components/page-hero'
 import { pageMetadata } from '@/lib/seo'
+import { JsonLd, breadcrumbJsonLd } from '@/lib/jsonld'
 
 export const metadata = pageMetadata({
   title: 'Referenties',
@@ -50,6 +51,12 @@ export default function ReferentiesPage() {
       <CtaBand
         title="Benieuwd wat we voor u kunnen doen?"
         text="Bel of mail uw vraag. Dan vertellen we graag welk vergelijkbaar werk we eerder hebben gedaan."
+      />
+      <JsonLd
+        data={breadcrumbJsonLd([
+          { name: 'Home', path: '/' },
+          { name: 'Referenties', path: '/referenties' },
+        ])}
       />
     </>
   )
