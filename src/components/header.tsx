@@ -37,7 +37,7 @@ export function Header() {
             <span className="truncate text-[0.95rem] font-bold tracking-tight text-navy-900 lg:text-lg">
               Erwin Blaauw
             </span>
-            <span className="mt-0.5 hidden truncate text-[0.62rem] font-semibold uppercase tracking-[0.16em] text-copper-700 min-[380px]:inline lg:text-[0.7rem]">
+            <span className="mt-0.5 hidden truncate text-[0.62rem] font-semibold uppercase tracking-[0.16em] text-copper-700 sm:inline lg:text-[0.7rem]">
               Installatietechniek
             </span>
           </span>
