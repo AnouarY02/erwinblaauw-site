@@ -1,19 +1,14 @@
 import Link from 'next/link'
 import { ContactForm } from '@/components/contact-form'
-import { CallMailButtons } from '@/components/contact-actions'
-import { IconArrow, IconClock, IconMail, IconPhone, IconPin } from '@/components/icons'
+import { IconArrow, IconMail, IconPhone } from '@/components/icons'
 import { PageHero } from '@/components/page-hero'
-import { Reveal } from '@/components/reveal'
-import { SectionHeading } from '@/components/section'
-import { servicePhotos } from '@/data/photos'
 import { site } from '@/data/site'
 import { JsonLd, breadcrumbJsonLd } from '@/lib/jsonld'
-import { mailtoAdvies, mailtoAlgemeen } from '@/lib/mailto'
 import { pageMetadata } from '@/lib/seo'
 
 export const metadata = pageMetadata({
   title: 'Contact',
-  description: `Neem contact op met ${site.name} in Gorredijk. Telefoon ${site.phone}, mobiel ${site.mobile}, e-mail ${site.email}.`,
+  description: `Neem contact op met ${site.name} in ${site.address.city}: bel ${site.phone}, mobiel ${site.mobile} of mail ${site.email}.`,
   path: '/contact',
 })
 
@@ -22,183 +17,48 @@ export default function ContactPage() {
     <>
       <PageHero
         crumb="Contact"
-        eyebrow="Contact"
         title="Neem contact op"
-        intro="Bel of mail voor een snel antwoord, of vul het formulier in en beschrijf uw situatie. We nemen dan contact met u op."
-        photo={servicePhotos['badkamer-en-sanitair']}
+        intro="Bellen is het snelst. Liever schrijven? Laat hieronder een kort bericht achter, dan nemen we contact met u op."
       />
 
-      {/* Bellen en mailen staan bovenaan, als snelste route. */}
-      <section className="border-b border-navy-100 bg-navy-50">
-        <div className="container-page flex flex-col gap-5 py-7 sm:flex-row sm:items-center sm:justify-between">
-          <p className="text-base font-semibold text-navy-900">
-            Liever geen formulier? Bel of mail rechtstreeks.
-          </p>
-          <CallMailButtons
-            mailHref={mailtoAlgemeen}
-            mailLabel={`Mail ${site.email}`}
-            size="sm"
-            className="shrink-0"
-          />
-        </div>
-      </section>
-
-      <section className="container-page py-16 lg:py-24">
-        <div className="grid gap-12 lg:grid-cols-[0.85fr_1.15fr] lg:gap-16">
-          {/* Gegevens */}
-          <div>
-            <Reveal>
-              <SectionHeading eyebrow="Gegevens" title="Direct contact" />
-
-              <ul className="mt-8 space-y-5">
-                <li className="flex gap-4">
-                  <span className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-navy-900 text-copper-300">
-                    <IconPhone className="h-5 w-5" />
-                  </span>
-                  <div>
-                    <p className="text-sm font-semibold uppercase tracking-[0.1em] text-navy-500">
-                      Telefoon
-                    </p>
-                    <a
-                      href={site.phoneHref}
-                      className="mt-1 block rounded text-lg font-bold text-navy-900 hover:text-copper-700"
-                    >
-                      {site.phone}
-                    </a>
-                    <a
-                      href={site.mobileHref}
-                      className="mt-0.5 block rounded text-lg font-bold text-navy-900 hover:text-copper-700"
-                    >
-                      {site.mobile}
-                    </a>
-                  </div>
-                </li>
-
-                <li className="flex gap-4">
-                  <span className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-navy-900 text-copper-300">
-                    <IconMail className="h-5 w-5" />
-                  </span>
-                  <div className="min-w-0">
-                    <p className="text-sm font-semibold uppercase tracking-[0.1em] text-navy-500">
-                      E-mail
-                    </p>
-                    <a
-                      href={mailtoAlgemeen}
-                      className="mt-1 block break-all rounded text-lg font-bold text-navy-900 hover:text-copper-700"
-                    >
-                      {site.email}
-                    </a>
-                    <a
-                      href={mailtoAdvies}
-                      className="btn-mail mt-3 !px-4 !py-2 !text-sm"
-                    >
-                      <IconMail className="h-4 w-4" />
-                      Mail uw aanvraag
-                    </a>
-                  </div>
-                </li>
-
-                <li className="flex gap-4">
-                  <span className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-navy-900 text-copper-300">
-                    <IconPin className="h-5 w-5" />
-                  </span>
-                  <div>
-                    <p className="text-sm font-semibold uppercase tracking-[0.1em] text-navy-500">
-                      Adres
-                    </p>
-                    <address className="mt-1 not-italic text-lg font-bold leading-snug text-navy-900">
-                      {site.address.street}
-                      <br />
-                      {site.address.postalCode} {site.address.city}
-                    </address>
-                    <Link
-                      href="/route"
-                      className="mt-2 inline-flex items-center gap-2 rounded text-sm font-semibold text-copper-700 hover:text-copper-800"
-                    >
-                      Bekijk de route
-                      <IconArrow className="h-4 w-4" />
-                    </Link>
-                  </div>
-                </li>
-              </ul>
-            </Reveal>
-
-            {/* Openingstijden — plaatshouder */}
-            <Reveal delay={90}>
-              <div className="mt-10 rounded-2xl border-2 border-dashed border-navy-300 bg-navy-50/60 p-6">
-                <div className="flex items-center gap-3">
-                  <IconClock className="h-5 w-5 text-navy-700" />
-                  <h2 className="text-base font-bold text-navy-900">Openingstijden</h2>
-                </div>
-                {/*
-                  TODO — OPENINGSTIJDEN INVULLEN
-                  De openingstijden zijn niet bekend; ze staan niet op de bestaande website.
-                  Vul de echte tijden hier in en voeg ze daarna ook toe aan het JSON-LD schema
-                  (src/lib/jsonld.tsx, veld openingHoursSpecification).
-                */}
-                <dl className="mt-5 space-y-2 text-sm">
-                  {['Maandag t/m vrijdag', 'Zaterdag', 'Zondag'].map((day) => (
-                    <div
-                      key={day}
-                      className="flex items-center justify-between gap-4 border-b border-navy-200/70 pb-2 last:border-0"
-                    >
-                      <dt className="font-medium text-navy-900">{day}</dt>
-                      <dd className="text-navy-500">nog in te vullen</dd>
-                    </div>
-                  ))}
-                </dl>
-                <p className="mt-5 text-sm leading-relaxed text-charcoal-700">
-                  De openingstijden zijn nog niet bekend. Tot die tijd: bel{' '}
-                  <a
-                    href={site.phoneHref}
-                    className="rounded font-semibold text-navy-900 underline decoration-copper-500 decoration-2 underline-offset-4"
-                  >
-                    {site.phone}
-                  </a>{' '}
-                  of mobiel{' '}
-                  <a
-                    href={site.mobileHref}
-                    className="rounded font-semibold text-navy-900 underline decoration-copper-500 decoration-2 underline-offset-4"
-                  >
-                    {site.mobile}
-                  </a>
-                  .
-                </p>
-              </div>
-            </Reveal>
+      <section className="sec sec-top">
+        <div className="wrap">
+          <div className="ways">
+            <a className="way way-main" href={site.phoneHref}>
+              <IconPhone className="way-ic" />
+              <span>Bel ons</span>
+              <strong>{site.phone}</strong>
+            </a>
+            <a className="way" href={site.mobileHref}>
+              <IconPhone className="way-ic" />
+              <span>Mobiel</span>
+              <strong>{site.mobile}</strong>
+            </a>
+            <a className="way" href={`mailto:${site.email}`}>
+              <IconMail className="way-ic" />
+              <span>Mail ons</span>
+              <strong>{site.email}</strong>
+            </a>
           </div>
 
-          {/* Formulier */}
-          <Reveal delay={60}>
-            <div className="rounded-3xl border border-navy-100 bg-white p-6 shadow-card sm:p-9">
-              <h2 className="text-2xl font-bold tracking-tight text-navy-900">
-                Vraag advies aan
-              </h2>
-              <p className="mt-3 text-base leading-relaxed text-charcoal-700">
-                Vul uw gegevens in en beschrijf waar het over gaat. Velden met een{' '}
-                <span className="font-semibold text-copper-700">*</span> zijn verplicht.
-              </p>
-              <div className="mt-8">
-                <ContactForm />
-              </div>
+          <div className="contact contact-simple">
+            <ContactForm />
 
-              {/* Alternatief naast het formulier: mailen of bellen. */}
-              <div className="mt-9 border-t border-navy-100 pt-7">
-                <p className="text-sm font-semibold text-navy-900">
-                  Liever niet via het formulier?
-                </p>
-                <p className="mt-1.5 text-sm leading-relaxed text-charcoal-700">
-                  Mail uw vraag of bel even. Dat mag ook buiten het formulier om.
-                </p>
-                <CallMailButtons
-                  mailHref={mailtoAlgemeen}
-                  mailLabel={`Mail ${site.email}`}
-                  size="sm"
-                  className="mt-4"
-                />
-              </div>
-            </div>
-          </Reveal>
+            <aside className="info">
+              <h2>Langskomen</h2>
+              <p>
+                {site.name}
+                <br />
+                {site.address.street}
+                <br />
+                {site.address.postalCode} {site.address.city}
+              </p>
+              <Link className="more" href="/route">
+                Bekijk de route
+                <IconArrow />
+              </Link>
+            </aside>
+          </div>
         </div>
       </section>
 

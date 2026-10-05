@@ -56,21 +56,23 @@ for (const [vpName, viewport] of viewports) {
     console.log(`${vpName} ${path} -> ${res.status()}`)
   }
 
-  // Mobiel menu open vastleggen
+  // Het menu is in het nieuwe ontwerp altijd zichtbaar: op smalle schermen
+  // een horizontaal schuifbare rij in plaats van een hamburgerknop. Leg vast
+  // dat alle zes items bereikbaar zijn.
   if (vpName === 'mobiel') {
-    await page.goto(BASE + '/', { waitUntil: 'networkidle' })
-    await page.getByRole('button', { name: /Menu openen/i }).click()
-    await page.waitForTimeout(300)
-    await page.screenshot({ path: `${OUT}/home-mobiel-menu-open.png` })
-    console.log('mobiel menu-open geschoten')
+    await page.goto(BASE + '/route', { waitUntil: 'networkidle' })
+    const items = await page.locator('#hoofdmenu a').count()
+    problems.push(`[info] menu-items op mobiel: ${items}`)
+    await page.locator('#hoofdmenu').screenshot({ path: `${OUT}/home-mobiel-menu.png` })
+    console.log('mobiel menu geschoten')
   }
 
   // Formuliervalidatie vastleggen (desktop)
   if (vpName === 'desktop') {
     await page.goto(BASE + '/contact', { waitUntil: 'networkidle' })
-    await page.getByRole('button', { name: /Verstuur aanvraag/i }).click()
+    await page.getByRole('button', { name: /^Verstuur$/ }).click()
     await page.waitForTimeout(400)
-    const errCount = await page.locator('p.text-red-700').count()
+    const errCount = await page.locator('p.f-error').count()
     problems.push(`[info] validatiefouten bij leeg formulier: ${errCount}`)
     await page.locator('#veld-bericht').scrollIntoViewIfNeeded()
     await page.screenshot({ path: `${OUT}/contact-desktop-validatie.png` })

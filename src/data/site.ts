@@ -108,9 +108,11 @@ export const services: Service[] = [
     slug: 'zink-en-dakwerk',
     label: 'Zink en dakwerk',
     title: 'Zink- en dakwerk',
-    summary: 'Van alle gebouwen in Nederland heeft 80% zinken dakgoten.',
+    // Het aangeleverde ontwerp laat het percentage en het aantal jaren weg,
+    // omdat die cijfers niet te onderbouwen zijn. Die tekst is hier leidend.
+    summary: 'Zinken dakgoten en dakwerk: duurzaam en fraai.',
     body: [
-      'Van alle gebouwen in Nederland heeft 80% zinken dakgoten. Dit omdat zink een duurzaam materiaal is dat 30 tot wel 50 jaar mee kan gaan.',
+      'Zink is een duurzaam materiaal dat lang mee kan gaan.',
       'Zink is volledig recyclebaar, het geeft een esthetisch fraai uiterlijk en is in vele uitvoeringsvormen leverbaar.',
     ],
     icon: 'roof',
@@ -152,25 +154,6 @@ export const services: Service[] = [
       'Ook kunnen wij u van dienst zijn bij het uitzoeken van een product dat het beste bij uw budget past.',
     ],
     icon: 'advice',
-  },
-]
-
-/** De drie USP's zijn een herformulering van de kernboodschap, geen nieuwe claims. */
-export const usps = [
-  {
-    title: 'Kwaliteit van het eindproduct',
-    text: 'Werk dat af is zoals het hoort: netjes uitgevoerd, veilig en gemaakt om jaren mee te gaan.',
-    icon: 'badge' as const,
-  },
-  {
-    title: 'Kwaliteit in het hele proces',
-    text: 'Niet alleen de aanleg, ook de totstandkoming, het beheer en het onderhoud daarna.',
-    icon: 'process' as const,
-  },
-  {
-    title: 'Kwaliteit in de samenwerking',
-    text: 'Samenwerken, meedenken en oplossen. U weet waar u aan toe bent.',
-    icon: 'handshake' as const,
   },
 ]
 
