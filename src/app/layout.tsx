@@ -34,7 +34,8 @@ export const metadata: Metadata = {
   icons: {
     icon: [
       { url: '/favicon.ico', sizes: '32x32' },
-      { url: '/favicon.svg', type: 'image/svg+xml' },
+      // De PNG hierachter wordt gegenereerd door src/app/icon.tsx
+      { url: '/icon', sizes: '64x64', type: 'image/png' },
     ],
     // De PNG hierachter wordt gegenereerd door src/app/apple-icon.tsx
     apple: [{ url: '/apple-icon', sizes: '180x180', type: 'image/png' }],
