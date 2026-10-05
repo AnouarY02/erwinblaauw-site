@@ -258,6 +258,7 @@ input:focus,textarea:focus{outline:3px solid var(--blue-soft);border-color:var(-
 .row{transition:background .3s}.row:hover .row-ic{background:var(--blue)}.row:hover .row-ic .ic-l{color:#fff}.row-ic,.row-ic .ic-l{transition:background .3s,color .3s}
 .rv{transition:opacity .7s ease,transform .7s cubic-bezier(.2,.8,.2,1)}.rv.pre{opacity:0;transform:translateY(28px)}
 @media (max-width:980px){
+  .hero-grid{grid-template-columns:minmax(0,1fr)}
   .hero-art{max-width:520px;margin-inline:auto;width:100%}
   .bento{grid-template-columns:repeat(2,minmax(0,1fr))}.t-wide{grid-column:span 2;flex-wrap:wrap}.t-wide p{flex-basis:100%}
   .qual-head,.about,.band,.call-row{grid-template-columns:minmax(0,1fr)}.qual-grid{grid-template-columns:minmax(0,1fr)}
