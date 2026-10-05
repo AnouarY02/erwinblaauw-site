@@ -40,6 +40,12 @@ export const site = {
   // Werkgebied zoals af te leiden uit de vestigingsplaats. Geen harde claims
   // over gemeenten of reistijden: dat kan Erwin zelf aanvullen.
   region: 'Gorredijk en omstreken (Friesland)',
+  // Kaart- en routelinks. De embed-URL is de publieke Google Maps-embed voor
+  // dit adres: geen API-sleutel, geen account, niets te betalen.
+  mapsDirectionsUrl:
+    'https://www.google.com/maps/dir/?api=1&destination=Brouwerij+1,+8401+PM+Gorredijk',
+  mapsEmbedUrl:
+    'https://www.google.com/maps?q=Brouwerij+1,+8401+PM+Gorredijk&z=15&hl=nl&output=embed',
 } as const
 
 export const coreMessage =

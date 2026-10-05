@@ -62,7 +62,7 @@ export default function RoutePage() {
             </address>
 
             <a
-              href="https://www.google.com/maps/dir/?api=1&destination=Brouwerij+1,+8401+PM+Gorredijk"
+              href={site.mapsDirectionsUrl}
               target="_blank"
               rel="noopener noreferrer"
               className="btn-primary mt-9 w-full sm:w-auto"
@@ -76,51 +76,19 @@ export default function RoutePage() {
           </Reveal>
 
           <Reveal delay={90}>
-            {/*
-              TODO — INGESLOTEN KAART
-              Hier stond een ingesloten Google Maps-kaart. Die laadt bij elk
-              bezoek ongevraagd Google-content en zet cookies; op een Nederlandse
-              bedrijfssite hoort daar een cookiekeuze bij. Zolang die er niet is,
-              staat hier een kaartblok dat de bezoeker zelf opent. Wil Erwin de
-              kaart wel ingesloten hebben, dan kan dit blok vervangen worden door
-              een iframe naar de kaart van dit adres.
-            */}
-            <a
-              href="https://www.google.com/maps/dir/?api=1&destination=Brouwerij+1,+8401+PM+Gorredijk"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group block overflow-hidden rounded-2xl border border-navy-200 bg-navy-50 shadow-card transition hover:border-copper-400 hover:shadow-lg"
-            >
-              <span className="relative flex h-[360px] w-full items-center justify-center overflow-hidden bg-gradient-to-br from-navy-100 via-white to-copper-50 sm:h-[480px] lg:h-[560px]">
-                <span className="pointer-events-none absolute inset-0 opacity-70" aria-hidden="true">
-                  <svg viewBox="0 0 400 400" className="h-full w-full" preserveAspectRatio="xMidYMid slice">
-                    <defs>
-                      <pattern id="kaartraster" width="40" height="40" patternUnits="userSpaceOnUse">
-                        <path d="M40 0H0V40" fill="none" stroke="#c9d6e8" strokeWidth="1" />
-                      </pattern>
-                    </defs>
-                    <rect width="400" height="400" fill="url(#kaartraster)" />
-                    <path d="M-20 250 L160 170 L420 230" fill="none" stroke="#b7c7dd" strokeWidth="14" />
-                    <path d="M120 -20 L175 180 L150 420" fill="none" stroke="#b7c7dd" strokeWidth="10" />
-                    <path d="M-20 90 L420 60" fill="none" stroke="#dde5f0" strokeWidth="8" />
-                  </svg>
-                </span>
-                <span className="relative flex flex-col items-center px-6 text-center">
-                  <span className="flex h-14 w-14 items-center justify-center rounded-full bg-copper-600 text-white shadow-lg transition group-hover:scale-105">
-                    <IconPin className="h-7 w-7" />
-                  </span>
-                  <span className="mt-4 text-lg font-bold text-navy-900">
-                    {site.address.street}, {site.address.city}
-                  </span>
-                  <span className="mt-1 text-sm text-charcoal-700">
-                    Klik om de route te openen in Google Maps
-                  </span>
-                </span>
-              </span>
-            </a>
+            <div className="overflow-hidden rounded-2xl border border-navy-200 bg-navy-50 shadow-card">
+              <iframe
+                src={site.mapsEmbedUrl}
+                title={`Kaart met de locatie van ${site.name} aan ${site.address.street} in ${site.address.city}`}
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                allowFullScreen
+                className="block h-[360px] w-full border-0 sm:h-[480px] lg:h-[560px]"
+              />
+            </div>
             <p className="mt-3 text-sm text-charcoal-700">
-              De kaart wordt pas bij Google opgehaald als u er zelf op klikt. Zo laadt deze
-              pagina niets van buitenaf.
+              De kaart komt van Google Maps en wordt pas geladen wanneer u er naartoe
+              scrollt. Werkt de kaart niet in uw browser, gebruik dan de knop hierboven.
             </p>
           </Reveal>
         </div>
