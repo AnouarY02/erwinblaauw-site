@@ -3,10 +3,44 @@ import { CtaBand } from '@/components/cta-band'
 import { IconArrow, IconImage, IconPhone, ServiceIcon } from '@/components/icons'
 import { PageHero } from '@/components/page-hero'
 import { Reveal } from '@/components/reveal'
-import { PhotoPlaceholder } from '@/components/section'
+import { Photo, PhotoPlaceholder } from '@/components/section'
 import { services, site } from '@/data/site'
 import { JsonLd, breadcrumbJsonLd } from '@/lib/jsonld'
 import { pageMetadata } from '@/lib/seo'
+
+/**
+ * Beeld bij een dienst. De vier beelden komen uit de bannerstrip van de huidige
+ * website; voor de overige diensten blijft de plaatshouder staan.
+ */
+const servicePhotos: Record<
+  string,
+  { src: string; alt: string; width: number; height: number }
+> = {
+  gasinstallaties: {
+    src: '/fotos/gasvlam-op-kookplaat.webp',
+    alt: 'Brandende gaspit met een blauwe vlam op een kookplaat',
+    width: 159,
+    height: 192,
+  },
+  waterleidinginstallaties: {
+    src: '/fotos/stromend-water-uit-kraan.webp',
+    alt: 'Helder water dat uit een kraan stroomt',
+    width: 153,
+    height: 192,
+  },
+  'centrale-verwarming': {
+    src: '/fotos/radiatoren-centrale-verwarming.webp',
+    alt: 'Twee radiatoren van een centrale verwarming',
+    width: 153,
+    height: 192,
+  },
+  'badkamer-en-sanitair': {
+    src: '/fotos/douchecabine-badkamer.webp',
+    alt: 'Glazen douchecabine met handdouche in een badkamer',
+    width: 160,
+    height: 192,
+  },
+}
 
 export const metadata = pageMetadata({
   title: 'Diensten',
@@ -84,13 +118,19 @@ export default function DienstenPage() {
                     </div>
                   </div>
 
-                  <PhotoPlaceholder
-                    label={`Foto bij ${service.label.toLowerCase()}`}
-                    hint="Liggend beeld, ongeveer 1200 × 800 pixels, uit eigen werk."
-                    className="aspect-[3/2] w-full"
-                  >
-                    <IconImage className="mx-auto h-10 w-10 text-navy-400" />
-                  </PhotoPlaceholder>
+                  {servicePhotos[service.slug] ? (
+                    <div className="mx-auto w-full max-w-[204px]">
+                      <Photo {...servicePhotos[service.slug]} />
+                    </div>
+                  ) : (
+                    <PhotoPlaceholder
+                      label={`Foto bij ${service.label.toLowerCase()}`}
+                      hint="Liggend beeld, ongeveer 1200 × 800 pixels, uit eigen werk."
+                      className="aspect-[3/2] w-full"
+                    >
+                      <IconImage className="mx-auto h-10 w-10 text-navy-400" />
+                    </PhotoPlaceholder>
+                  )}
                 </div>
               </Reveal>
             </div>

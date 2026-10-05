@@ -1,9 +1,9 @@
 import Link from 'next/link'
 import { CtaBand } from '@/components/cta-band'
-import { IconArrow, IconImage, UspIcon } from '@/components/icons'
+import { IconArrow, UspIcon } from '@/components/icons'
 import { PageHero } from '@/components/page-hero'
 import { Reveal } from '@/components/reveal'
-import { PhotoPlaceholder, SectionHeading } from '@/components/section'
+import { Photo, SectionHeading } from '@/components/section'
 import { coreMessage, services, site, usps } from '@/data/site'
 import { JsonLd, breadcrumbJsonLd } from '@/lib/jsonld'
 import { pageMetadata } from '@/lib/seo'
@@ -45,13 +45,17 @@ export default function OverOnsPage() {
           </Reveal>
 
           <Reveal delay={100}>
-            <PhotoPlaceholder
-              label="Portretfoto van Erwin"
-              hint="Staand beeld, ongeveer 900 × 1100 pixels. Bijvoorbeeld bij de werkbus of in de werkplaats."
-              className="aspect-[4/5] w-full"
-            >
-              <IconImage className="mx-auto h-11 w-11 text-navy-400" />
-            </PhotoPlaceholder>
+            <figure className="mx-auto w-full max-w-[232px] lg:mx-0">
+              <Photo
+                src="/fotos/erwin-blaauw-bij-bedrijfsbus.webp"
+                alt="Erwin Blaauw bij zijn bedrijfsbus met het bedrijfslogo erop"
+                width={174}
+                height={294}
+              />
+              <figcaption className="mt-3 text-sm text-charcoal-700">
+                Erwin Blaauw bij de bedrijfsbus.
+              </figcaption>
+            </figure>
           </Reveal>
         </div>
       </section>

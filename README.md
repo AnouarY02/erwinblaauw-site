@@ -11,7 +11,13 @@ Geen CMS, geen database, geen backend-secrets.
 Home · Diensten · Referenties · Over ons · Contact · Route · 404.
 
 ## Nog in te vullen door Erwin
-1. **Eigen foto's** — alle beeldvlakken zijn plaatshouders met het gewenste formaat erbij.
+1. **Eigen foto's** — de bruikbare foto's van de huidige site zijn hergebruikt en staan in
+   `public/fotos/`: Erwin bij de bedrijfsbus, de bus met ladders en vier beelden uit de oude
+   bannerstrip (gas, water, cv, badkamer). Ze zijn klein van origine (circa 174 × 294 en
+   155 × 192 pixels) en worden daarom bewust klein getoond. De overige beeldvlakken zijn nog
+   plaatshouders met het gewenste formaat erbij: eigen foto's in hogere resolutie — werk in
+   uitvoering, zink- en dakwerk, riolering, dakbedekking, ventilatie en projectreferenties —
+   zijn welkom.
 2. **Ontvanger contactformulier** — zie de TODO in `src/components/contact-form.tsx`.
    Nu staat het formulier op `mailto:`; vul een Formspree-endpoint in voor directe verzending.
 3. **Openingstijden** — zie de TODO in `src/app/contact/page.tsx`.

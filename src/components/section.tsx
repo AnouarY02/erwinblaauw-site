@@ -1,3 +1,4 @@
+import Image from 'next/image'
 import type { ReactNode } from 'react'
 
 export function SectionHeading({
@@ -47,8 +48,41 @@ export function SectionHeading({
 }
 
 /**
- * Nette plaatshouder voor beeldmateriaal. Er worden bewust geen foto's van de
- * oude website hergebruikt; Erwin kan hier zijn eigen foto's laten plaatsen.
+ * Echte foto uit `public/fotos/`. De beelden komen van de huidige website van
+ * Erwin Blaauw en zijn klein van origine (circa 174 x 294 en 155 x 192 pixels).
+ * Geef de weergavebreedte daarom mee via een wrapper om de foto heen en houd
+ * die dicht bij het oorspronkelijke formaat, anders wordt het beeld wazig.
+ */
+export function Photo({
+  src,
+  alt,
+  width,
+  height,
+  tone = 'light',
+}: {
+  src: string
+  alt: string
+  width: number
+  height: number
+  tone?: 'light' | 'dark'
+}) {
+  return (
+    <Image
+      src={src}
+      alt={alt}
+      width={width}
+      height={height}
+      sizes="(max-width: 640px) 50vw, 240px"
+      className={`h-auto w-full rounded-2xl border ${
+        tone === 'dark' ? 'border-white/15' : 'border-navy-100 shadow-card'
+      }`}
+    />
+  )
+}
+
+/**
+ * Nette plaatshouder voor beeldvlakken waar nog geen bruikbare foto voor is.
+ * Erwin kan hier zijn eigen foto's laten plaatsen.
  */
 export function PhotoPlaceholder({
   label,

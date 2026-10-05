@@ -11,7 +11,7 @@ import {
   UspIcon,
 } from '@/components/icons'
 import { Reveal } from '@/components/reveal'
-import { PhotoPlaceholder, SectionHeading } from '@/components/section'
+import { Photo, PhotoPlaceholder, SectionHeading } from '@/components/section'
 import { coreMessage, services, site, usps } from '@/data/site'
 import { pageMetadata } from '@/lib/seo'
 
@@ -93,23 +93,22 @@ export default function HomePage() {
                 <IconImage className="mx-auto h-12 w-12 text-white/70" />
               </PhotoPlaceholder>
 
-              <div className="mt-4 grid grid-cols-3 gap-3">
-                {['Werkbus', 'Detail vakwerk', 'Opgeleverd project'].map((label) => (
-                  <div
-                    key={label}
-                    className="flex aspect-square flex-col items-center justify-center rounded-xl border border-dashed border-white/25 bg-white/[0.04] p-2 text-center"
-                  >
-                    <IconImage className="h-5 w-5 text-white/50" aria-hidden="true" />
-                    <span className="mt-1.5 text-[0.62rem] font-medium leading-tight text-white/70">
-                      {label}
-                    </span>
-                  </div>
-                ))}
+              <div className="mt-4 flex items-start gap-4">
+                <div className="w-[124px] shrink-0 sm:w-[146px]">
+                  <Photo
+                    src="/fotos/bedrijfsbus-met-ladders.webp"
+                    alt="De bedrijfsbus van Erwin Blaauw Installatietechniek met ladders op het dak"
+                    width={174}
+                    height={294}
+                    tone="dark"
+                  />
+                </div>
+                <p className="text-xs leading-relaxed text-navy-300">
+                  Deze foto komt van de huidige website van Erwin Blaauw. Het liggende vlak
+                  hierboven is nog een plaatshouder: daar past een eigen foto van werk in
+                  uitvoering.
+                </p>
               </div>
-              <p className="mt-3 text-xs text-navy-300">
-                Deze vlakken zijn plaatshouders. Zodra Erwin eigen foto&apos;s aanlevert, komen
-                die hier.
-              </p>
             </div>
           </Reveal>
         </div>
@@ -210,13 +209,14 @@ export default function HomePage() {
       <section className="container-page py-20 lg:py-24">
         <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
           <Reveal>
-            <PhotoPlaceholder
-              label="Portretfoto of foto van de werkbus"
-              hint="Staand of vierkant beeld, ongeveer 900 × 1000 pixels."
-              className="aspect-[4/5] w-full"
-            >
-              <IconImage className="mx-auto h-11 w-11 text-navy-400" />
-            </PhotoPlaceholder>
+            <div className="mx-auto w-full max-w-[232px] lg:mx-0">
+              <Photo
+                src="/fotos/erwin-blaauw-bij-bedrijfsbus.webp"
+                alt="Erwin Blaauw bij zijn bedrijfsbus in Gorredijk"
+                width={174}
+                height={294}
+              />
+            </div>
           </Reveal>
           <Reveal delay={100}>
             <SectionHeading eyebrow="Over ons" title="Vakwerk met korte lijnen" />
